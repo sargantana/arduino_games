@@ -6,9 +6,13 @@ Currently under developement.
 
 Planning to merge all games into a single sketch with menu.
 
+## games in beta:
+
+tetris
+
+snake
+
 ## finished games:
 
 
-## games in beta:
-tetris
-snake
+
