@@ -19,16 +19,17 @@ const int rightPin = 4;           // the pin of the right button
 const int rotateLeftPin = 5;      // the pin of the rotateleft button
 const int rotateRightPin = 6;     // the pin of the rotateright button
 
-const int numChips = 1;           // number of MAX7221 chips in each matrix
+const int numChips = 1;                           // number of MAX7221 chips in each matrix
 //                 DIN, CLK, LOAD, #chips
-Matrix green = Matrix(9, 8, 7, numChips);    // the green 8 x 16 led matrix
-// Matrix red = Matrix(12, 11, 10, numChips);   // the red 8 x 16 led matrix
-// Matrix blue = Matrix(13, 14, 15, numChips);   // the blue 8 x 16 led matrix
+Matrix red = Matrix(9, 8, 7, numChips);           // the green 8 x 16 led matrix
+// Matrix green = Matrix(12, 11, 10, numChips);   // the red 8 x 16 led matrix
+// Matrix blue = Matrix(13, 14, 15, numChips);    // the blue 8 x 16 led matrix
 
-int backgroundBlocks [8][20];     //8 x 16 display + 4 x 8 blocks above for blocks to spawn in
-int displayScreen [8][20];        //8 x 16 display + 4 x 8 blocks above for blocks to spawn in
-int blockType ;                   //7 different block types
-int state;                        //4 possible rotation states
+int backgroundBlocks [8][20];     // 8 x 16 display + 4 x 8 blocks above for blocks to spawn in
+int displayScreen [8][20];        // 8 x 16 display + 4 x 8 blocks above for blocks to spawn in
+int blockType ;                   // 7 different block types
+int state;                        // 4 possible rotation states
+int brightness = 8;               // brightness of the led matrix from 0 to 15
 
  // BLOCK DEFINITIONS START HERE
 
@@ -174,22 +175,21 @@ const int activeBlocks [28][4][4] = {
                             {0,0,0,0}}
                           };
                                                                                                     
-int blockColumn;             //the x value of the left most row in the 4x4 active block placeholder
-int blockRow;                //the y value of the bottom column in the 4x4 active block placeholder
+int blockColumn;             // the x value of the left most row in the 4x4 active block placeholder
+int blockRow;                // the y value of the bottom column in the 4x4 active block placeholder
 
 int rowToBeDeleted;
 bool inGame = false;
 bool justLost = false;
-int brightness = 8;
 long fallRate;
 
 void setup() 
 {
-  pinMode(leftPin, INPUT);
-  pinMode(downPin, INPUT);
-  pinMode(rightPin, INPUT);
-  pinMode(rotateLeftPin, INPUT);
-  pinMode(rotateRightPin, INPUT);
+  pinMode(leftPin, INPUT_PULLDOWN);
+  pinMode(downPin, INPUT_PULLDOWN);
+  pinMode(rightPin, INPUT_PULLDOWN);
+  pinMode(rotateLeftPin, INPUT_PULLDOWN);
+  pinMode(rotateRightPin, INPUT_PULLDOWN);
   green.setBrightness(brightness);  // sets brightness of the led matrix values range from 0 to 15
   red.setBrightness(brightness);
   randomSeed(analogRead(1));
@@ -197,7 +197,7 @@ void setup()
 
 void newGame()
 {
-  green.clear();                        // clears the green display matrix
+  // green.clear();                        // clears the green display matrix
   red.clear();                          // clears the red display matrix
   resetArrays();
   newBlock();
@@ -238,17 +238,17 @@ void displayArray()  // cycles through each pixel in displayScreen and outputs c
       if(pixel == RED)  
       {
         red.write(y, x, HIGH);
-        green.write(y, x, LOW);
+       // green.write(y, x, LOW);
       }
       else if(pixel == GREEN)
       {
-        red.write(y, x, LOW);
-        green.write(y, x, HIGH);
+       // red.write(y, x, LOW);
+        red.write(y, x, HIGH);
       }
       else if(pixel == ORANGE)
       {
         red.write(y, x, HIGH);        // orange colour achieved by putting both green 
-        green.write(y, x, HIGH);      // and red leds on at the same time
+       // green.write(y, x, HIGH);      // and red leds on at the same time
       }
       else
       {
@@ -296,13 +296,13 @@ void fall()               // this function is called by a timer interupt every f
 
 void tetrisText()      // displays the word 'TETRIS' to screen
 {
-  green.write(11, 1, HIGH); // letter T in orange
-  green.write(12, 1, HIGH);
-  green.write(13, 1, HIGH);
-  green.write(14, 1, HIGH);
-  green.write(15, 0, HIGH);
-  green.write(15, 1, HIGH);
-  green.write(15, 2, HIGH);
+ // green.write(11, 1, HIGH); // letter T in orange
+ // green.write(12, 1, HIGH);
+ // green.write(13, 1, HIGH);
+ // green.write(14, 1, HIGH);
+ // green.write(15, 0, HIGH);
+ // green.write(15, 1, HIGH);
+ // green.write(15, 2, HIGH);
   red.write(11, 1, HIGH);
   red.write(12, 1, HIGH);
   red.write(13, 1, HIGH);
@@ -311,17 +311,17 @@ void tetrisText()      // displays the word 'TETRIS' to screen
   red.write(15, 1, HIGH);
   red.write(15, 2, HIGH);
   
-  green.write(11, 4, HIGH); // letter E in green
-  green.write(11, 5, HIGH);
-  green.write(11, 6, HIGH);
-  green.write(12, 4, HIGH);
-  green.write(13, 4, HIGH);
-  green.write(13, 5, HIGH);
-  green.write(13, 6, HIGH);
-  green.write(14, 4, HIGH);
-  green.write(15, 4, HIGH);
-  green.write(15, 5, HIGH);
-  green.write(15, 6, HIGH);
+  red.write(11, 4, HIGH); // letter E in red
+  red.write(11, 5, HIGH);
+  red.write(11, 6, HIGH);
+  red.write(12, 4, HIGH);
+  red.write(13, 4, HIGH);
+  red.write(13, 5, HIGH);
+  red.write(13, 6, HIGH);
+  red.write(14, 4, HIGH);
+  red.write(15, 4, HIGH);
+  red.write(15, 5, HIGH);
+  red.write(15, 6, HIGH);
   
   red.write(6, 1, HIGH);  //letter T in red
   red.write(7, 1, HIGH);
@@ -330,14 +330,14 @@ void tetrisText()      // displays the word 'TETRIS' to screen
   red.write(9, 1, HIGH);
   red.write(9, 2, HIGH);
   
-  green.write(6, 4, HIGH);  // letter R in orange
-  green.write(6, 6, HIGH);
-  green.write(7, 4, HIGH);
-  green.write(7, 5, HIGH);
-  green.write(8, 4, HIGH);
-  green.write(8, 6, HIGH);
-  green.write(9, 4, HIGH);
-  green.write(9, 5, HIGH);
+ // green.write(6, 4, HIGH);  // letter R in red
+ // green.write(6, 6, HIGH);
+ // green.write(7, 4, HIGH);
+ // green.write(7, 5, HIGH);
+ // green.write(8, 4, HIGH);
+ // green.write(8, 6, HIGH);
+ // green.write(9, 4, HIGH);
+ // green.write(9, 5, HIGH);
   red.write(6, 4, HIGH);  
   red.write(6, 6, HIGH);
   red.write(7, 4, HIGH);
@@ -347,11 +347,11 @@ void tetrisText()      // displays the word 'TETRIS' to screen
   red.write(9, 4, HIGH);
   red.write(9, 5, HIGH);
   
-  green.write(0, 1, HIGH);  // letter I in green
-  green.write(1, 1, HIGH);
-  green.write(2, 1, HIGH);
-  green.write(3, 1, HIGH);
-  green.write(4, 1, HIGH);
+  red.write(0, 1, HIGH);  // letter I in red
+  red.write(1, 1, HIGH);
+  red.write(2, 1, HIGH);
+  red.write(3, 1, HIGH);
+  red.write(4, 1, HIGH);
   
   red.write(0, 4, HIGH);   //letter S in red
   red.write(0, 5, HIGH);
