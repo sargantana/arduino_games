@@ -1,4 +1,14 @@
-# arduinotetris
-tetris
+# arduino_games
 
-small code mock up to test tetris on arduino with two 8x8 led matrices, expandable to RGB
+small collection of sketches for arduino and led matrix, as portbale game console.
+
+Currently under developement.
+
+Planning to merge all games into a single sketch with menu.
+
+## finished games:
+
+
+## games in beta:
+tetris
+snake
