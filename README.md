@@ -2,22 +2,22 @@
 
 small collection of sketches for ATmega328p-pu to use with 2 daisychained MAX7219-driven led matrices as some sort of portbale game console.
 
-Currently under developement.
+**Currently under developement.
 
 Planning to merge all games into a single sketch with menu.
 
 ## games in beta:
 
-tetris
+> tetris
 
-snake
+> snake
 
 ## finished games:
 
 
 
 ### hardware:
-6 momentary push buttons 12x12mm
+> 6 momentary push buttons 12x12mm
 
 ATmega328p-pu microcontroller with arduino bootloader
 
