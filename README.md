@@ -16,7 +16,7 @@ Planning to merge all games into a single sketch with menu.
 
 
 ## hardware:
- '''
+ ```
  - 6 momentary push buttons 12x12mm
   - ATmega328p-pu microcontroller with arduino bootloader
   - 2x MAX7219 matrix/7-segment-display driver
@@ -24,4 +24,4 @@ Planning to merge all games into a single sketch with menu.
   - power switch
   - 750mAh 3.7V Li-Ion 1s1p cell
   - potentiometer 4 pong (?)
- '''
+ ```
